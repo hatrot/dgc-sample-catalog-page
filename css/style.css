@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+/* Header */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #e0e0e0;
+}
+
+.product-card-content {
+  padding: 1.5rem;
+}
+
+.product-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+.btn-secondary {
+  background: #95a5a6;
+}
+
+.btn-secondary:hover {
+  background: #7f8c8d;
+}
+
+/* Product detail page */
+.product-detail {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-detail-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.product-detail-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  background: #e0e0e0;
+}
+
+.product-detail-info {
+  padding: 2rem;
+}
+
+.product-detail-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-detail-info .price {
+  font-size: 1.5rem;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+}
+
+.product-detail-info .description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.product-specs {
+  padding: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.product-specs h3 {
+  margin-bottom: 1rem;
+}
+
+.product-specs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-specs td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.product-specs td:first-child {
+  font-weight: bold;
+  width: 30%;
+}
+
+/* Download form */
+.download-form {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.download-form h2 {
+  margin-bottom: 1.5rem;
+}
+
+.viewed-products {
+  margin-bottom: 2rem;
+}
+
+.viewed-products h3 {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.viewed-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.viewed-item input[type="checkbox"] {
+  margin-right: 1rem;
+  width: 20px;
+  height: 20px;
+}
+
+.viewed-item label {
+  flex: 1;
+}
+
+.no-history {
+  color: #999;
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* View history badge */
+.history-badge {
+  background: #e74c3c;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-detail-header {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail-image {
+    height: 250px;
+  }
+}

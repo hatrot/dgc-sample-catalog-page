@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カタログ請求 - Sample Products</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Sample Products</h1>
+    <nav>
+      <a href="index.html">製品一覧</a>
+      <a href="download.html">
+        カタログ請求
+        <span id="history-count" class="history-badge" style="display: none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="download-form">
+      <h2>カタログダウンロード請求</h2>
+
+      <div class="viewed-products">
+        <h3>閲覧した製品</h3>
+        <div id="viewed-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <form id="download-request-form">
+        <div class="form-group">
+          <label for="name">お名前 <span style="color: #e74c3c;">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="山田 太郎">
+        </div>
+
+        <div class="form-group">
+          <label for="email">メールアドレス <span style="color: #e74c3c;">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="example@company.co.jp">
+        </div>
+
+        <div class="form-group">
+          <label for="company">会社名</label>
+          <input type="text" id="company" name="company" placeholder="株式会社サンプル">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">電話番号</label>
+          <input type="tel" id="phone" name="phone" placeholder="03-1234-5678">
+        </div>
+
+        <div class="form-group">
+          <label for="message">ご質問・ご要望</label>
+          <textarea id="message" name="message" rows="4" placeholder="製品についてのご質問があればお書きください"></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submit-btn">カタログを請求する</button>
+        <button type="button" class="btn btn-secondary" onclick="ViewTracker.clearHistory(); renderViewedProducts();" style="margin-left: 1rem;">履歴をクリア</button>
+      </form>
+
+      <div id="success-message" style="display: none; padding: 2rem; background: #d4edda; border-radius: 8px; text-align: center; margin-top: 2rem;">
+        <h3 style="color: #155724; margin-bottom: 1rem;">送信完了</h3>
+        <p style="color: #155724;">カタログ請求を受け付けました。ご入力いただいたメールアドレスにダウンロードリンクをお送りします。</p>
+        <a href="index.html" class="btn" style="margin-top: 1rem;">製品一覧に戻る</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sample Products - ダウンロード要求POC</p>
+  </footer>
+
+  <script src="js/tracker.js"></script>
+  <script>
+    function renderViewedProducts() {
+      const container = document.getElementById('viewed-list');
+      const viewed = ViewTracker.getViewed();
+
+      if (viewed.length === 0) {
+        container.innerHTML = '<p class="no-history">まだ製品ページを閲覧していません。<br><a href="index.html">製品一覧</a>から製品をご覧ください。</p>';
+        return;
+      }
+
+      container.innerHTML = viewed.map(product => `
+        <div class="viewed-item">
+          <input type="checkbox" id="${product.id}" name="products" value="${product.id}" checked>
+          <label for="${product.id}">${product.name}</label>
+        </div>
+      `).join('');
+
+      updateBadge();
+    }
+
+    // Handle form submission
+    document.getElementById('download-request-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get selected products
+      const selectedProducts = Array.from(document.querySelectorAll('input[name="products"]:checked'))
+        .map(cb => cb.value);
+
+      if (selectedProducts.length === 0) {
+        alert('ダウンロードする製品を選択してください');
+        return;
+      }
+
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        company: document.getElementById('company').value,
+        phone: document.getElementById('phone').value,
+        message: document.getElementById('message').value,
+        products: selectedProducts
+      };
+
+      // Log for POC demonstration
+      console.log('Download Request:', formData);
+
+      // Show success message (POC - no actual backend)
+      document.getElementById('download-request-form').style.display = 'none';
+      document.querySelector('.viewed-products').style.display = 'none';
+      document.getElementById('success-message').style.display = 'block';
+    });
+
+    // Initialize
+    renderViewedProducts();
+  </script>
+</body>
+</html>
